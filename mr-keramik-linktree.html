@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MR Keramik - Solusi Belanja Keramik, Harga Terbaik</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 30px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            width: 180px;
+            height: auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #7f8c8d;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 18px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 15px;
+            font-size: 17px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .link-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        .link-btn.whatsapp {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+        }
+
+        .link-btn.instagram {
+            background: linear-gradient(135deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+        }
+
+        .link-btn.facebook {
+            background: linear-gradient(135deg, #4267B2 0%, #2d4373 100%);
+        }
+
+        .link-btn.shopee {
+            background: linear-gradient(135deg, #EE4D2D 0%, #d63c1e 100%);
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        .catalog-section {
+            margin-top: 40px;
+        }
+
+        .catalog-section h2 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 24px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .product-size {
+            color: #7f8c8d;
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+
+        .minat-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .minat-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 2px solid #ecf0f1;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        .footer strong {
+            color: #2c3e50;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        /* Modal untuk zoom gambar */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: zoomIn 0.3s;
+        }
+
+        @keyframes zoomIn {
+            from { transform: translate(-50%, -50%) scale(0.7); }
+            to { transform: translate(-50%, -50%) scale(1); }
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close:hover {
+            color: #bbb;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .catalog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .link-btn {
+                font-size: 16px;
+                padding: 16px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect fill='%2393b8d1' x='20' y='30' width='60' height='40' rx='20'/%3E%3Cpath fill='%235488a8' d='M80,30 L130,30 L130,80 L80,80 Z'/%3E%3Cpath fill='%23ffffff' d='M115,30 L180,95 L115,95 Z'/%3E%3Cpath fill='%232d5673' d='M130,80 L180,130 L130,130 Z'/%3E%3Cpath fill='%235488a8' d='M20,80 L70,80 L70,130 L20,130 Z' transform='skewX(-10)'/%3E%3Ctext x='100' y='165' font-family='Arial, sans-serif' font-size='35' font-weight='bold' fill='%235488a8' text-anchor='middle'%3EMR KERAMIK%3C/text%3E%3Ctext x='100' y='185' font-family='Arial, sans-serif' font-size='12' fill='%2393b8d1' text-anchor='middle'%3ESOLUSI BELANJA KERAMIK, HARGA TERBAIK%3C/text%3E%3C/svg%3E" alt="MR Keramik Logo">
+        </div>
+
+        <div class="header">
+            <h1>MR KERAMIK</h1>
+            <p>Solusi Belanja Keramik, Harga Terbaik<br>
+            Jl. Minggir No.20, Cangkringmalang, Beji-Pasuruan</p>
+        </div>
+
+        <div class="links">
+            <a href="https://api.whatsapp.com/send/?phone=%2B62895700125224&text=Halo%20MR%20Keramik,%20saya%20ingin%20bertanya&type=phone_number&app_absent=0" class="link-btn whatsapp" target="_blank">
+                <svg class="icon" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                WhatsApp
+            </a>
+
+            <a href="https://www.instagram.com/mr.keramikpasuruan/" class="link-btn instagram" target="_blank">
+                <svg class="icon" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                Instagram
+            </a>
+
+            <a href="https://web.facebook.com/profile.php?id=61575245624886" class="link-btn facebook" target="_blank">
+                <svg class="icon" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                Facebook
+            </a>
+
+            <a href="https://www.tiktok.com/@mr.keramikpasuruan?lang=id-ID" class="link-btn tiktok" target="_blank">
+                <svg class="icon" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+                TikTok
+            </a>
+
+            <a href="https://shopee.co.id/mr.keramik?entryPoint=ShopBySearch&searchKeyword=mr%20keramik" class="link-btn shopee" target="_blank">
+                <svg class="icon" fill="currentColor" viewBox="0 0 24 24"><path d="M15.5 12.8c0 .5-.3.8-.7.8-.5 0-.8-.3-.8-.8v-3.5c0-.5.3-.8.8-.8.4 0 .7.3.7.8v3.5zm7-5.5h-.7c-.4 0-.7.2-.9.6l-2.6 4.8-2.6-4.8c-.2-.4-.5-.6-.9-.6h-.7c-.3 0-.5.2-.5.5v7c0 .4.3.7.7.7.5 0 .8-.3.8-.7V9.9l2.1 3.8c.2.4.5.6.9.6h.4c.4 0 .7-.2.9-.6l2.1-3.8v4.9c0 .4.3.7.8.7.4 0 .7-.3.7-.7v-7c0-.3-.2-.5-.5-.5zm-19.3.5c0-.4.3-.7.8-.7.4 0 .7.3.7.7v2.7h3.5V7.8c0-.4.3-.7.7-.7.5 0 .8.3.8.7v7c0 .4-.3.7-.8.7-.4 0-.7-.3-.7-.7v-3.2H4.7v3.2c0 .4-.3.7-.7.7-.5 0-.8-.3-.8-.7v-7zm7.3 0c0-.4.3-.7.8-.7h3.3c.4 0 .7.2.7.6 0 .4-.3.7-.7.7h-2.5v2h2.1c.4 0 .7.3.7.7 0 .4-.3.7-.7.7h-2.1v2.1h2.5c.4 0 .7.3.7.7 0 .4-.3.6-.7.6h-3.3c-.5 0-.8-.3-.8-.7v-7z"/></svg>
+                Shopee
+            </a>
+        </div>
+
+        <div class="catalog-section">
+            <h2>📋 Katalog Produk Keramik</h2>
+            <div class="catalog-grid">
+                <div class="product-card">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect fill='%23f5f5f5' width='400' height='400'/%3E%3Cpath fill='%23fff' stroke='%23c8a882' stroke-width='2' d='M50,50 Q200,150 350,50 Q250,200 350,350 Q200,250 50,350 Q150,200 50,50 Z'/%3E%3Cpath fill='none' stroke='%23b8946f' stroke-width='1.5' d='M100,100 Q200,180 300,100 M100,200 Q200,280 300,200 M100,300 Q200,220 300,300'/%3E%3Cellipse cx='150' cy='120' rx='15' ry='8' fill='%23a67c52' opacity='0.3'/%3E%3Cellipse cx='250' cy='180' rx='20' ry='10' fill='%23000' opacity='0.2'/%3E%3C/svg%3E" alt="Evara White" class="product-image" onclick="openModal(this.src)">
+                    <div class="product-info">
+                        <div class="product-name">EVARA WHITE</div>
+                        <div class="product-size">40 x 40 cm • KOBIN</div>
+                        <a href="https://api.whatsapp.com/send/?phone=%2B62895700125224&text=Halo%20MR%20Keramik,%20saya%20tertarik%20dengan%20produk%20*EVARA%20WHITE%2040x40%20KOBIN*.%20Apakah%20barang%20masih%20ada?" class="minat-btn" target="_blank">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                            Minat
+                        </a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cdefs%3E%3ClinearGradient id='g1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23e8e8e8'/%3E%3Cstop offset='100%25' style='stop-color:%23d0d0d0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23g1)' width='400' height='400'/%3E%3Cpath fill='none' stroke='%23b8b8b8' stroke-width='1' d='M0,50 Q100,30 200,50 T400,50 M0,100 Q100,120 200,100 T400,100 M0,150 Q100,130 200,150 T400,150 M0,200 Q100,220 200,200 T400,200 M0,250 Q100,230 200,250 T400,250 M0,300 Q100,320 200,300 T400,300 M0,350 Q100,330 200,350 T400,350' opacity='0.4'/%3E%3Cpath fill='%23c9b382' d='M80,120 L100,140 L90,160 Z' opacity='0.3'/%3E%3Cpath fill='%23d4c19a' d='M250,200 L280,220 L260,250 Z' opacity='0.25'/%3E%3C/svg%3E" alt="Denver Grey" class="product-image" onclick="openModal(this.src)">
+                    <div class="product-info">
+                        <div class="product-name">DENVER GREY</div>
+                        <div class="product-size">40 x 40 cm • KOBIN</div>
+                        <a href="https://api.whatsapp.com/send/?phone=%2B62895700125224&text=Halo%20MR%20Keramik,%20saya%20tertarik%20dengan%20produk%20*DENVER%20GREY%2040x40%20KOBIN*.%20Apakah%20barang%20masih%20ada?" class="minat-btn" target="_blank">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                            Minat
+                        </a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cdefs%3E%3ClinearGradient id='g2' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23f8f8f8'/%3E%3Cstop offset='100%25' style='stop-color:%23e5e5e5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23g2)' width='400' height='400'/%3E%3Cpath fill='none' stroke='%23c9b896' stroke-width='1.5' d='M20,80 Q150,120 280,60 M40,150 Q180,200 320,140 M30,220 Q170,280 310,200 M50,300 Q200,350 340,280' opacity='0.4'/%3E%3Cpath fill='%23d4c19a' d='M180,150 Q190,160 200,150 L210,180 Q200,190 190,180 Z' opacity='0.3'/%3E%3Cellipse cx='120' cy='200' rx='25' ry='15' fill='%23b89968' opacity='0.2'/%3E%3C/svg%3E" alt="Austin Grey" class="product-image" onclick="openModal(this.src)">
+                    <div class="product-info">
+                        <div class="product-name">AUSTIN GREY</div>
+                        <div class="product-size">40 x 40 cm • KOBIN</div>
+                        <a href="https://api.whatsapp.com/send/?phone=%2B62895700125224&text=Halo%20MR%20Keramik,%20saya%20tertarik%20dengan%20produk%20*AUSTIN%20GREY%2040x40%20KOBIN*.%20Apakah%20barang%20masih%20ada?" class="minat-btn" target="_blank">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                            Minat
+                        </a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cdefs%3E%3CradialGradient id='g3'%3E%3Cstop offset='0%25' style='stop-color:%23667eea'/%3E%3Cstop offset='100%25' style='stop-color:%23764ba2'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect fill='%23f0f0f0' width='400' height='400'/%3E%3Ctext x='200' y='200' font-family='Arial' font-size='48' fill='%239e9e9e' text-anchor='middle' dominant-baseline='middle'%3EMR KERAMIK%3C/text%3E%3Ctext x='200' y='250' font-family='Arial' font-size='16' fill='%23bdbdbd' text-anchor='middle'%3EProduk Berkualitas%3C/text%3E%3C/svg%3E" alt="Produk Lainnya" class="product-image" onclick="openModal(this.src)">
+                    <div class="product-info">
+                        <div class="product-name">PRODUK LAINNYA</div>
+                        <div class="product-size">Berbagai Ukuran & Motif</div>
+                        <a href="https://api.whatsapp.com/send/?phone=%2B62895700125224&text=Halo%20MR%20Keramik,%20saya%20ingin%20melihat%20katalog%20produk%20lengkap.%20Apakah%20bisa%20dibantu?" class="minat-btn" target="_blank">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                            Lihat Katalog
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <strong>MR KERAMIK</strong>
+            📍 Jl. Dusun Minggir No.20, RT/RW 02/12<br>
+            Sawah, Cangkringmalang, Beji-Pasuruan<br>
+            Jawa Timur 67154<br>
+            📞 0895-7001-25224
+        </div>
+    </div>
+
+    <!-- Modal untuk zoom gambar -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script>
+        function openModal(src) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.style.display = 'block';
+            modalImg.src = src;
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        // Close modal dengan tombol ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
